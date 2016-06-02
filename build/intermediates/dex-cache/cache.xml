@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/mxia/Library/Android/sdk/extras/android/m2repository/com/android/support/support-v4/19.0.1/support-v4-19.0.1.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="587da9a481ffd341d2fa091704489b89845ddacd">
+        <dex dex="/Users/mxia/ws/study/SimpleStocks/SimpleStocks/build/intermediates/transforms/dex/debug/folders/1000/10/support-v4-19.0.1_26bfcc3078e7fdf5afd10b74bb48b603dc4afcbd/classes.dex" />
+    </item>
+    <item
+        jar="/Users/mxia/ws/study/SimpleStocks/SimpleStocks/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="67025bcc0145ee06ebf3be922a8e98e30d925eba">
+        <dex dex="/Users/mxia/ws/study/SimpleStocks/SimpleStocks/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_5143fe3faa5229828340b36ead811bd1627748ac/classes.dex" />
+    </item>
+    <item
+        jar="/Users/mxia/ws/study/SimpleStocks/SimpleStocks/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="21.1.2"
+        sha1="ed5a9228301eed5d94b135cf31034f6a632697e7">
+        <dex dex="/Users/mxia/ws/study/SimpleStocks/SimpleStocks/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_16793a205bbc583a07bdd669c47e2775d4bbb05a/classes.dex" />
+    </item>
+
+</items>
