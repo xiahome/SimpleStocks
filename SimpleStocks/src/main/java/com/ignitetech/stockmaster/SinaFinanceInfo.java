@@ -75,26 +75,21 @@ public class SinaFinanceInfo {
   final static int DATE_INDEX = 30;
   final static int TIME_INDEX = 31;
 
-  public static SinaStock getStockData(String tickerNumber) {
+  public static SinaStock getStockData(String stockNumber) {
     String[] responseData;
     SinaStock sinaStock = new SinaStock();
-    try {
-      sinaStock.setTicketNumber(Integer.valueOf(tickerNumber));
-    } catch (NumberFormatException e) {
-      Log.e("TAG", "getStockData: ");
-      return null;
-    }
+    sinaStock.setStockNumber(stockNumber);
 
     try {
-      URL url = new URL("http://hq.sinajs.cn/list=sh" + tickerNumber);
+      URL url = new URL("http://hq.sinajs.cn/list=" + stockNumber);
       URLConnection urlConnection = url.openConnection();
-      BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+      BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "GBK"));
 
       // Split CSV by comma and quotes
       responseData = in.readLine().split(",");
       in.close();
 
-      sinaStock.setStockName(recover(responseData[STOCK_NAME_INDEX]));
+      sinaStock.setStockName(responseData[STOCK_NAME_INDEX].split("\"")[1]);
       sinaStock.setOpenPrice(responseData[OPEN_PRICE_INDEX]);
       sinaStock.setPreCosePrice(responseData[PREV_CLOSE_INDEX]);
       sinaStock.setCurPrice(responseData[CUR_PRICE_INDEX]);
@@ -133,42 +128,60 @@ public class SinaFinanceInfo {
     } catch (Exception e) {
 
       Log.d("IOERROR", "Error occurred during generating data from http response:" + e.toString());
-    } return sinaStock;
-  }
-
-  // This method will retrieve the price chart from Yahoo and returns it as a drawable
-  public static Drawable getPriceChart(String ticker, String timeInterval, String plotType) {
-
-    Drawable d = null;
-
-    try {
-
-      URL url = new URL("http://chart.finance.yahoo.com/z?" + "s=" + ticker + "&t=" + timeInterval
-          // Time interval, {1d, 5d, 3m, 6m, 1y, 2y, 5y, my}
-          + "&q=" + plotType      // Chart type {l, b, c}
-          + "&l=" + "on"  // Logarithmic scaling {on, off}
-          + "&z=" + "m"   // Size {m, l}
-          + "&a=v" // Volume
-      );
-
-      InputStream content = (InputStream) url.getContent();
-      d = Drawable.createFromStream(content, "src");
-    } catch (Exception e) {
-
-      Log.d("ERROR_GETTINGCHARTS", e.toString());
     }
-
-    return d;
+    return sinaStock;
   }
 
-  public static String recover(String str)
-      throws Exception {
-    return new String(str.getBytes("GBK"), "UTF-8");
+  /**
+   * This method will retrieve the price chart from Sina and returns it as a drawable. Example:
+   * 分时  http://image.sinajs.cn/newchart/min/n/sh000001.gif
+   * 日K线 http://image.sinajs.cn/newchart/daily/n/sh000001.gif
+   * 周K线 http://image.sinajs.cn/newchart/weekly/n/sh000001.gif
+   * 月K线 http://image.sinajs.cn/newchart/monthly/n/sh000001.gif
+   * @param stockNumber The stock number.
+   * @param timeScale The time granularity of the stock chart.
+   * @return Stock chart as a {@link Drawable}.
+   */
+  public static Drawable getPriceChart(String stockNumber, TimeScale timeScale) {
+    // Log.d("Debug111", "getting stock chart for " + stockNumber);
+    Drawable drawable = null;
+    try {
+      String targetUrl = "http://image.sinajs.cn/newchart/" + getTimeScale(timeScale) + "/n/" + stockNumber + ".gif";
+      System.out.println(targetUrl);
+      URL url = new URL(targetUrl);
+      InputStream content = (InputStream) url.getContent();
+      drawable = Drawable.createFromStream(content, "src");
+      // Log.d("Debug111", "getPriceChart: got something.");
+    } catch (Exception e) {
+      System.out.println(e.fillInStackTrace());
+    }
+    return drawable;
+  }
+
+  private static String getTimeScale(TimeScale timeScale) {
+    switch (timeScale) {
+      case MIN:
+        return "min";
+      case DAY:
+        return "daily";
+      case WEEK:
+        return "weekly";
+      case MONTH:
+        return "monthly";
+      default:
+        return "UnknownTimeScale";
+    }
   }
 
   @Test
-  public void test() {
-    SinaStock sinaStock = SinaFinanceInfo.getStockData("601006");
+  public void testTextAPI() {
+    SinaStock sinaStock = SinaFinanceInfo.getStockData("sh601006");
     System.out.print(sinaStock.toString());
+  }
+
+  @Test
+  public void testChartAPI() {
+    Drawable drawble = getPriceChart("sh601006", TimeScale.DAY);
+    System.out.println(drawble.toString());
   }
 }

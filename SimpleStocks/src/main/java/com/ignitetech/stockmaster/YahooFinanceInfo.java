@@ -99,7 +99,13 @@ public class YahooFinanceInfo {
     Drawable d = null;
 
     try {
-
+      System.out.println("http://chart.finance.yahoo.com/z?" + "s=" + ticker + "&t=" + timeInterval
+              // Time interval, {1d, 5d, 3m, 6m, 1y, 2y, 5y, my}
+              + "&q=" + plotType      // Chart type {l, b, c}
+              + "&l=" + "on"  // Logarithmic scaling {on, off}
+              + "&z=" + "m"   // Size {m, l}
+              + "&a=v" // Volume
+      );
       URL url = new URL("http://chart.finance.yahoo.com/z?" + "s=" + ticker + "&t=" + timeInterval
           // Time interval, {1d, 5d, 3m, 6m, 1y, 2y, 5y, my}
           + "&q=" + plotType      // Chart type {l, b, c}

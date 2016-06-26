@@ -39,7 +39,7 @@ public class SinaStock {
   private String date;
   private String time;
 
-  private int ticketNumber;
+  private String stockNumber;
   private Drawable priceChart;
 
   public String getStockName() {
@@ -298,12 +298,12 @@ public class SinaStock {
     this.time = time;
   }
 
-  public int getTicketNumber() {
-    return ticketNumber;
+  public String getStockNumber() {
+    return stockNumber;
   }
 
-  public void setTicketNumber(int ticketNumber) {
-    this.ticketNumber = ticketNumber;
+  public void setStockNumber(String stockNumber) {
+    this.stockNumber = stockNumber;
   }
 
   public Drawable getPriceChart() {
@@ -317,7 +317,7 @@ public class SinaStock {
   @Override
   public String toString() {
     StringBuilder sb= new StringBuilder();
-    sb.append("Ticker number: " + ticketNumber + "\r\n");
+    sb.append("Stock number: " + stockNumber + "\r\n");
     sb.append("Name: " + stockName + "\r\n");
     sb.append("Open price: " + openPrice + "\r\n");
     sb.append("Previous day close price: " + preCosePrice + "\r\n");

@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
+import com.ignitetech.stockmaster.SinaFinanceInfo;
+import com.ignitetech.stockmaster.TimeScale;
 import com.kevinchou.simplestocks.R;
 import com.ignitetech.stockmaster.Stock;
 import com.ignitetech.stockmaster.YahooFinanceInfo;
@@ -92,7 +94,7 @@ public class PriceChartFragment extends Fragment {
   private class OnTimeIntervalRadioButtonListener implements View.OnClickListener {
     @Override
     public void onClick(View v) {
-      new GetPriceChartAsyncTask().execute(stock.getTicker());
+      new GetPriceChartAsyncTask().execute("sh601006");
     }
   }
 
@@ -110,6 +112,7 @@ public class PriceChartFragment extends Fragment {
       String tick = arg[0];
       String timeInterval;
       String plotType;
+      Log.d("DEBUG111", "stock: " + tick);
 
       // Chosen time interval
       if (rbTime1d.isChecked()) {
@@ -141,12 +144,14 @@ public class PriceChartFragment extends Fragment {
         plotType = "b";
       }
 
-      // Gets Price Chart from Yahoo
+      Log.d("Debug111", "Trying to get drawble from Sina API.");
       try {
-        Drawable d = YahooFinanceInfo.getPriceChart(tick, timeInterval, plotType);
+        // Drawable d = YahooFinanceInfo.getPriceChart(tick, timeInterval, plotType);
+        Drawable d = SinaFinanceInfo.getPriceChart(tick, TimeScale.DAY);
+        Log.d("DEBUG", "doInBackground: " + "Got drawable" + d.toString());
         stock.setPriceChart(d);
       } catch (Exception e) {
-        Log.d("YAHOO_ERROR", e.toString());
+        Log.d("ERROR", e.toString());
       }
 
       return stock;

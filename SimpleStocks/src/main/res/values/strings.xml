@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">易格莱科技</string>
-
     <string name="key_statistics">Key Stats</string>
     <string name="price_info">Price Info</string>
     <string name="charts">Charts</string>
