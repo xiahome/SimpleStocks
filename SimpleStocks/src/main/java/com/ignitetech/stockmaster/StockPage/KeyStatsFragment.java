@@ -1,4 +1,4 @@
-package com.kevinchou.simplestocks.StockPage;
+package com.ignitetech.stockmaster.StockPage;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.kevinchou.simplestocks.R;
-import com.kevinchou.simplestocks.Stock;
+import com.ignitetech.stockmaster.Stock;
 
 
 public class KeyStatsFragment extends Fragment {

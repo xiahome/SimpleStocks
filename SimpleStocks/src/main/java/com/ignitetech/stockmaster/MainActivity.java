@@ -1,4 +1,4 @@
-package com.kevinchou.simplestocks;
+package com.ignitetech.stockmaster;
 
 import android.app.ActionBar;
 import android.app.SearchManager;
@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+import com.kevinchou.simplestocks.R;
 
 
 public class MainActivity extends FragmentActivity {

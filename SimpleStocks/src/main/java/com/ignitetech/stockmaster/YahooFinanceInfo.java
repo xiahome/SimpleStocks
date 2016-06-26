@@ -1,4 +1,4 @@
-package com.kevinchou.simplestocks;
+package com.ignitetech.stockmaster;
 
 import android.graphics.drawable.Drawable;
 import android.util.Log;

@@ -1,4 +1,4 @@
-package com.kevinchou.simplestocks.StockPage;
+package com.ignitetech.stockmaster.StockPage;
 
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -14,8 +14,8 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
 import com.kevinchou.simplestocks.R;
-import com.kevinchou.simplestocks.Stock;
-import com.kevinchou.simplestocks.YahooFinanceInfo;
+import com.ignitetech.stockmaster.Stock;
+import com.ignitetech.stockmaster.YahooFinanceInfo;
 
 
 /** This fragment retrieves and displays the price chart for the current stock from Yahoo */

@@ -1,18 +1,18 @@
-package com.kevinchou.simplestocks;
+package com.ignitetech.stockmaster;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.kevinchou.simplestocks.StockPage.PriceInfoFragment;
-import com.kevinchou.simplestocks.StockPage.PriceChartFragment;
+import com.ignitetech.stockmaster.StockPage.PriceInfoFragment;
+import com.ignitetech.stockmaster.StockPage.PriceChartFragment;
+import com.kevinchou.simplestocks.R;
 
 
 public class StockPageFragment extends Fragment {
