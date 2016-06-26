@@ -2,258 +2,247 @@ package com.kevinchou.simplestocks;
 
 import android.graphics.drawable.Drawable;
 
-public class Stock
-{
-    public Stock() {}
 
-    private String prevClose;
-    private String open;
-    private String bid;
-    private String ask;
-    private String oneYearTarget;
-    private String price;
-    private String priceChange;
-    private String marketCap;
-    private String trailingPE;
-    private String forwardPE;
-    private String pegRatio;
-    private String priceSales;
-    private String priceBook;
-    private String ebitda;
-    private String tradeDate;
+public class Stock {
+  public Stock() {
+  }
 
-    public String getDaysRange() {
-        return daysRange;
+  private String prevClose;
+  private String open;
+  private String bid;
+  private String ask;
+  private String oneYearTarget;
+  private String price;
+  private String priceChange;
+  private String marketCap;
+  private String trailingPE;
+  private String forwardPE;
+  private String pegRatio;
+  private String priceSales;
+  private String priceBook;
+  private String ebitda;
+  private String tradeDate;
+
+  public String getDaysRange() {
+    return daysRange;
+  }
+
+  public void setDaysRange(String daysRange) {
+    this.daysRange = daysRange;
+  }
+
+  public String getYearRange() {
+    return yearRange;
+  }
+
+  public void setYearRange(String yearRange) {
+    this.yearRange = yearRange;
+  }
+
+  private String daysRange;
+  private String yearRange;
+
+  public String getAvgDailyVolume() {
+    return avgDailyVolume;
+  }
+
+  public void setAvgDailyVolume(String avgDailyVolume) {
+    this.avgDailyVolume = avgDailyVolume;
+  }
+
+  public String getVolume() {
+    return volume;
+  }
+
+  public void setVolume(String volume) {
+    this.volume = volume;
+  }
+
+  private String avgDailyVolume;
+  private String volume;
+
+  private String tradeTime;
+  private String name;
+  private String ticker;
+  private String exchange;
+
+  private Drawable priceChart;
+
+  public String getTradeTime() {
+    return tradeTime;
+  }
+
+  public void setTradeTime(String tradeTime) {
+    this.tradeTime = tradeTime;
+  }
+
+  // Handles the price change info
+  public int getPriceChangeDirection() {
+
+    if (priceChange.length() > 0) {
+
+      String d = priceChange.substring(0, 1);
+
+      if (d.equals("-")) {
+        return -1;
+      } else if (d.equals("+")) {
+        return 1;
+      }
     }
+    return 0;
+  }
 
-    public void setDaysRange(String daysRange) {
-        this.daysRange = daysRange;
-    }
+  // Getters and setters
 
-    public String getYearRange() {
-        return yearRange;
-    }
+  public Drawable getPriceChart() {
+    return priceChart;
+  }
 
-    public void setYearRange(String yearRange) {
-        this.yearRange = yearRange;
-    }
+  public void setPriceChart(Drawable priceChart) {
+    this.priceChart = priceChart;
+  }
 
-    private String daysRange;
-    private String yearRange;
+  public String getPrevClose() {
+    return prevClose;
+  }
 
+  public void setPrevClose(String prevClose) {
+    this.prevClose = prevClose;
+  }
 
-    public String getAvgDailyVolume() {
-        return avgDailyVolume;
-    }
+  public String getOpen() {
+    return open;
+  }
 
-    public void setAvgDailyVolume(String avgDailyVolume) {
-        this.avgDailyVolume = avgDailyVolume;
-    }
+  public void setOpen(String open) {
+    this.open = open;
+  }
 
-    public String getVolume() {
-        return volume;
-    }
+  public String getBid() {
+    return bid;
+  }
 
-    public void setVolume(String volume) {
-        this.volume = volume;
-    }
+  public void setBid(String bid) {
+    this.bid = bid;
+  }
 
-    private String avgDailyVolume;
-    private String volume;
+  public String getAsk() {
+    return ask;
+  }
 
-    private String tradeTime;
-    private String name;
-    private String ticker;
-    private String exchange;
+  public void setAsk(String ask) {
+    this.ask = ask;
+  }
 
+  public String getOneYearTarget() {
+    return oneYearTarget;
+  }
 
-    private Drawable priceChart;
+  public void setOneYearTarget(String oneYearTarget) {
+    this.oneYearTarget = oneYearTarget;
+  }
 
-    public String getTradeTime() {
-        return tradeTime;
-    }
+  public String getPrice() {
+    return price;
+  }
 
-    public void setTradeTime(String tradeTime) {
-        this.tradeTime = tradeTime;
-    }
+  public void setPrice(String price) {
+    this.price = price;
+  }
 
-    // Handles the price change info
-    public int getPriceChangeDirection() {
+  public String getPriceChange() {
+    return priceChange;
+  }
 
-        if(priceChange.length() > 0) {
+  public void setPriceChange(String priceChange) {
+    this.priceChange = priceChange;
+  }
 
-            String d = priceChange.substring(0, 1);
+  public String getMarketCap() {
+    return marketCap;
+  }
 
-            if (d.equals("-"))
-            {
-                return -1;
-            }
-            else if (d.equals("+"))
-            {
-                return 1;
-            }
+  public void setMarketCap(String marketCap) {
+    this.marketCap = marketCap;
+  }
 
-        }
-        return 0;
+  public String getTrailingPE() {
+    return trailingPE;
+  }
 
-    }
+  public void setTrailingPE(String trailingPE) {
+    this.trailingPE = trailingPE;
+  }
 
+  public String getForwardPE() {
+    return forwardPE;
+  }
 
+  public void setForwardPE(String forwardPE) {
+    this.forwardPE = forwardPE;
+  }
 
-    // Getters and setters
+  public String getPegRatio() {
+    return pegRatio;
+  }
 
-    public Drawable getPriceChart() {
-        return priceChart;
-    }
+  public void setPegRatio(String pegRatio) {
+    this.pegRatio = pegRatio;
+  }
 
-    public void setPriceChart(Drawable priceChart) {
-        this.priceChart = priceChart;
-    }
+  public String getPriceSales() {
+    return priceSales;
+  }
 
-    public String getPrevClose() {
-        return prevClose;
-    }
+  public void setPriceSales(String priceSales) {
+    this.priceSales = priceSales;
+  }
 
-    public void setPrevClose(String prevClose) {
-        this.prevClose = prevClose;
-    }
+  public String getPriceBook() {
+    return priceBook;
+  }
 
-    public String getOpen() {
-        return open;
-    }
+  public void setPriceBook(String priceBook) {
+    this.priceBook = priceBook;
+  }
 
-    public void setOpen(String open) {
-        this.open = open;
-    }
+  public String getEbitda() {
+    return ebitda;
+  }
 
-    public String getBid() {
-        return bid;
-    }
+  public void setEbitda(String ebitda) {
+    this.ebitda = ebitda;
+  }
 
-    public void setBid(String bid) {
-        this.bid = bid;
-    }
+  public String getTradeDate() {
+    return tradeDate;
+  }
 
-    public String getAsk() {
-        return ask;
-    }
+  public void setTradeDate(String tradeDate) {
+    this.tradeDate = tradeDate;
+  }
 
-    public void setAsk(String ask) {
-        this.ask = ask;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public String getOneYearTarget() {
-        return oneYearTarget;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public void setOneYearTarget(String oneYearTarget) {
-        this.oneYearTarget = oneYearTarget;
-    }
+  public String getTicker() {
+    return ticker;
+  }
 
+  public void setTicker(String ticker) {
+    this.ticker = ticker;
+  }
 
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getPriceChange() {
-        return priceChange;
-    }
-
-    public void setPriceChange(String priceChange) {
-        this.priceChange = priceChange;
-    }
-
-    public String getMarketCap() {
-        return marketCap;
-    }
-
-    public void setMarketCap(String marketCap) {
-        this.marketCap = marketCap;
-    }
-
-    public String getTrailingPE() {
-        return trailingPE;
-    }
-
-    public void setTrailingPE(String trailingPE) {
-        this.trailingPE = trailingPE;
-    }
-
-    public String getForwardPE() {
-        return forwardPE;
-    }
-
-    public void setForwardPE(String forwardPE) {
-        this.forwardPE = forwardPE;
-    }
-
-    public String getPegRatio() {
-        return pegRatio;
-    }
-
-    public void setPegRatio(String pegRatio) {
-        this.pegRatio = pegRatio;
-    }
-
-    public String getPriceSales() {
-        return priceSales;
-    }
-
-    public void setPriceSales(String priceSales) {
-        this.priceSales = priceSales;
-    }
-
-    public String getPriceBook() {
-        return priceBook;
-    }
-
-    public void setPriceBook(String priceBook) {
-        this.priceBook = priceBook;
-    }
-
-    public String getEbitda() {
-        return ebitda;
-    }
-
-    public void setEbitda(String ebitda) {
-        this.ebitda = ebitda;
-    }
-
-    public String getTradeDate() {
-        return tradeDate;
-    }
-
-    public void setTradeDate(String tradeDate) {
-        this.tradeDate = tradeDate;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getTicker() {
-        return ticker;
-    }
-
-    public void setTicker(String ticker) {
-        this.ticker = ticker;
-    }
-
-    public String getExchange() {
+  public String getExchange() {
     return exchange;
-}
+  }
 
-    public void setExchange(String exchange) {
-        this.exchange = exchange;
-    }
-
-
+  public void setExchange(String exchange) {
+    this.exchange = exchange;
+  }
 }

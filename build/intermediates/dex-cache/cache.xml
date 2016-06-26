@@ -12,14 +12,14 @@
         jar="/Users/mxia/ws/study/SimpleStocks/SimpleStocks/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         revision="21.1.2"
-        sha1="67025bcc0145ee06ebf3be922a8e98e30d925eba">
+        sha1="f9e861293de10d000c87a16f52c599921011c35c">
         <dex dex="/Users/mxia/ws/study/SimpleStocks/SimpleStocks/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_5143fe3faa5229828340b36ead811bd1627748ac/classes.dex" />
     </item>
     <item
         jar="/Users/mxia/ws/study/SimpleStocks/SimpleStocks/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         revision="21.1.2"
-        sha1="ed5a9228301eed5d94b135cf31034f6a632697e7">
+        sha1="c11cef1ca5e4e9f7ac7ac4f8f6e1d76379225b5f">
         <dex dex="/Users/mxia/ws/study/SimpleStocks/SimpleStocks/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_16793a205bbc583a07bdd669c47e2775d4bbb05a/classes.dex" />
     </item>
 
