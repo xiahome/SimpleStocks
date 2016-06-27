@@ -12,41 +12,36 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
-
 import com.ignitetech.stockmaster.SinaFinanceInfo;
+import com.ignitetech.stockmaster.SinaStock;
 import com.ignitetech.stockmaster.TimeScale;
-import com.kevinchou.simplestocks.R;
-import com.ignitetech.stockmaster.Stock;
-import com.ignitetech.stockmaster.YahooFinanceInfo;
+import com.ignitetech.stockmaster.R;
 
-
-/** This fragment retrieves and displays the price chart for the current stock from Yahoo */
+/**
+ * This fragment retrieves and displays the price chart for the current stock from Sina.
+ * */
 
 public class PriceChartFragment extends Fragment {
 
   RelativeLayout rlPriceChartContainer;
   LinearLayout llChartProgress;
-  ImageView ivPriceChart;
+  ImageView imageViewPriceChart;
 
-  RadioButton rbTime1d;
-  RadioButton rbTime5d;
-  RadioButton rbTime3m;
-  RadioButton rbTime6m;
-  RadioButton rbTime1y;
-  RadioButton rbTime5y;
-  RadioButton rbTimeMax;
+  RadioButton radioButtonMinute;
+  RadioButton radioButtonDay;
+  RadioButton radioButtonWeek;
+  RadioButton radioButtonMonth;
 
   RadioButton rbPlotTypeLine;
   RadioButton rbPlotTypeBar;
   RadioButton rbPlotTypeCandle;
 
-  Stock stock;
+  SinaStock stock;
 
   public PriceChartFragment() {
   }
 
-  public static PriceChartFragment newInstance(Stock stock) {
-
+  public static PriceChartFragment newInstance(SinaStock stock) {
     PriceChartFragment fragment = new PriceChartFragment();
     fragment.stock = stock;
     return fragment;
@@ -54,29 +49,21 @@ public class PriceChartFragment extends Fragment {
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
     View rootView = inflater.inflate(R.layout.fragment_pricechart, container, false);
 
     rlPriceChartContainer = (RelativeLayout) rootView.findViewById(R.id.rlPriceChartContainer);
-    ivPriceChart = (ImageView) rootView.findViewById(R.id.ivPriceChart);
-
+    imageViewPriceChart = (ImageView) rootView.findViewById(R.id.imageViewPriceChart);
     llChartProgress = (LinearLayout) rootView.findViewById(R.id.llChartProgress);
 
-    rbTime1d = (RadioButton) rootView.findViewById(R.id.rbTime1d);
-    rbTime5d = (RadioButton) rootView.findViewById(R.id.rbTime5d);
-    rbTime3m = (RadioButton) rootView.findViewById(R.id.rbTime3m);
-    rbTime6m = (RadioButton) rootView.findViewById(R.id.rbTime6m);
-    rbTime1y = (RadioButton) rootView.findViewById(R.id.rbTime1y);
-    rbTime5y = (RadioButton) rootView.findViewById(R.id.rbTime5y);
-    rbTimeMax = (RadioButton) rootView.findViewById(R.id.rbTimeMax);
+    radioButtonMinute = (RadioButton) rootView.findViewById(R.id.radioButtonMinute);
+    radioButtonDay = (RadioButton) rootView.findViewById(R.id.radioButtonDay);
+    radioButtonWeek = (RadioButton) rootView.findViewById(R.id.radioButtonWeek);
+    radioButtonMonth = (RadioButton) rootView.findViewById(R.id.radioButtonMonth);
 
-    rbTime1d.setOnClickListener(new OnTimeIntervalRadioButtonListener());
-    rbTime5d.setOnClickListener(new OnTimeIntervalRadioButtonListener());
-    rbTime3m.setOnClickListener(new OnTimeIntervalRadioButtonListener());
-    rbTime6m.setOnClickListener(new OnTimeIntervalRadioButtonListener());
-    rbTime1y.setOnClickListener(new OnTimeIntervalRadioButtonListener());
-    rbTime5y.setOnClickListener(new OnTimeIntervalRadioButtonListener());
-    rbTimeMax.setOnClickListener(new OnTimeIntervalRadioButtonListener());
+    radioButtonMinute.setOnClickListener(new OnTimeIntervalRadioButtonListener());
+    radioButtonDay.setOnClickListener(new OnTimeIntervalRadioButtonListener());
+    radioButtonWeek.setOnClickListener(new OnTimeIntervalRadioButtonListener());
+    radioButtonMonth.setOnClickListener(new OnTimeIntervalRadioButtonListener());
 
     rbPlotTypeLine = (RadioButton) rootView.findViewById(R.id.rbPlotTypeLine);
     rbPlotTypeBar = (RadioButton) rootView.findViewById(R.id.rbPlotTypeBar);
@@ -86,54 +73,46 @@ public class PriceChartFragment extends Fragment {
     rbPlotTypeBar.setOnClickListener(new OnTimeIntervalRadioButtonListener());
     rbPlotTypeCandle.setOnClickListener(new OnTimeIntervalRadioButtonListener());
 
-    new GetPriceChartAsyncTask().execute(stock.getTicker());
-
+    new GetPriceChartAsyncTask().execute(stock.getStockNumber());
     return rootView;
   }
 
   private class OnTimeIntervalRadioButtonListener implements View.OnClickListener {
     @Override
     public void onClick(View v) {
-      new GetPriceChartAsyncTask().execute("sh601006");
+      new GetPriceChartAsyncTask().execute(stock.getStockNumber());
     }
   }
 
-  private class GetPriceChartAsyncTask extends AsyncTask<String, Void, Stock> {
+  private class GetPriceChartAsyncTask extends AsyncTask<String, Void, SinaStock> {
 
     @Override
     protected void onPreExecute() {
       llChartProgress.setVisibility(View.VISIBLE);
-      ivPriceChart.setVisibility(View.INVISIBLE);
+      imageViewPriceChart.setVisibility(View.INVISIBLE);
     }
 
     @Override
-    protected Stock doInBackground(String... arg) {
+    protected SinaStock doInBackground(String... arg) {
 
-      String tick = arg[0];
-      String timeInterval;
-      String plotType;
-      Log.d("DEBUG111", "stock: " + tick);
+      String stockNumber = arg[0];
+      TimeScale timeScale;
+      Log.d("DEBUG111", "stock: " + stockNumber);
 
       // Chosen time interval
-      if (rbTime1d.isChecked()) {
-        timeInterval = "1d";
-      } else if (rbTime5d.isChecked()) {
-        timeInterval = "5d";
-      } else if (rbTime3m.isChecked()) {
-        timeInterval = "3m";
-      } else if (rbTime6m.isChecked()) {
-        timeInterval = "6m";
-      } else if (rbTime1y.isChecked()) {
-        timeInterval = "1y";
-      } else if (rbTime5y.isChecked()) {
-        timeInterval = "5y";
-      } else if (rbTimeMax.isChecked()) {
-        timeInterval = "my";
+      if (radioButtonMinute.isChecked()) {
+        timeScale = TimeScale.MIN;
+      } else if (radioButtonDay.isChecked()) {
+        timeScale = TimeScale.DAY;
+      } else if (radioButtonWeek.isChecked()) {
+        timeScale = TimeScale.WEEK;
+      } else if (radioButtonMonth.isChecked()) {
+        timeScale = TimeScale.MONTH;
       } else {
-        timeInterval = "5d";
+        timeScale = TimeScale.MIN;
       }
 
-      // Plot type (bar, candle, line)
+      /*// Plot type (bar, candle, line)
       if (rbPlotTypeBar.isChecked()) {
         plotType = "b";
       } else if (rbPlotTypeCandle.isChecked()) {
@@ -143,29 +122,27 @@ public class PriceChartFragment extends Fragment {
       } else {
         plotType = "b";
       }
+      Log.d("Debug111", "Trying to get drawble from Sina API.");*/
 
-      Log.d("Debug111", "Trying to get drawble from Sina API.");
       try {
         // Drawable d = YahooFinanceInfo.getPriceChart(tick, timeInterval, plotType);
-        Drawable d = SinaFinanceInfo.getPriceChart(tick, TimeScale.DAY);
+        Drawable d = SinaFinanceInfo.getPriceChart(stockNumber, timeScale);
         Log.d("DEBUG", "doInBackground: " + "Got drawable" + d.toString());
         stock.setPriceChart(d);
       } catch (Exception e) {
         Log.d("ERROR", e.toString());
       }
-
       return stock;
     }
 
     @Override
-    protected void onPostExecute(Stock stock) {
-
+    protected void onPostExecute(SinaStock stock) {
       // Turns off progress view and sets price chart visible
       llChartProgress.setVisibility(View.INVISIBLE);
-      ivPriceChart.setVisibility(View.VISIBLE);
+      imageViewPriceChart.setVisibility(View.VISIBLE);
 
       // Sets the imageview to the retrieved drawable
-      ivPriceChart.setImageDrawable(stock.getPriceChart());
+      imageViewPriceChart.setImageDrawable(stock.getPriceChart());
     }
   }
 }

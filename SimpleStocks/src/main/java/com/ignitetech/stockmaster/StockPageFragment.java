@@ -9,31 +9,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.ignitetech.stockmaster.StockPage.PriceInfoFragment;
 import com.ignitetech.stockmaster.StockPage.PriceChartFragment;
-import com.kevinchou.simplestocks.R;
 
 
 public class StockPageFragment extends Fragment {
-
-  TextView tvCompany;
-  TextView tvCompanyTicker;
-  TextView tvPrice;
-  TextView tvPriceChange;
-  TextView tvTradeDate;
-  TextView tvTradeTime;
-
+  TextView textViewStockName;
+  TextView textViewStockNumber;
+  TextView textViewCurrentPrice;
+  TextView textViewPriceChange;
+  TextView textViewTradeDate;
+  TextView textViewUpdateTime;
   ViewPager mViewPager;
   StockInfoPagerAdapter mStockInfoPagerAdapter;
-
-  Stock stock;
+  SinaStock stock;
 
   public StockPageFragment() {
   }
 
-  public static StockPageFragment newInstance(Stock stock) {
-
+  public static StockPageFragment newInstance(SinaStock stock) {
     StockPageFragment fragment = new StockPageFragment();
     fragment.stock = stock;
     return fragment;
@@ -43,37 +37,36 @@ public class StockPageFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View rootView = inflater.inflate(R.layout.fragment_stockpage, container, false);
 
-    tvCompany = (TextView) rootView.findViewById(R.id.tvCompany);
-    tvCompanyTicker = (TextView) rootView.findViewById(R.id.tvCompanyTicker);
-    tvPrice = (TextView) rootView.findViewById(R.id.tvPrice);
-    tvPriceChange = (TextView) rootView.findViewById(R.id.tvPriceChange);
-    tvTradeDate = (TextView) rootView.findViewById(R.id.tvTradeDate);
-    tvTradeTime = (TextView) rootView.findViewById(R.id.tvTradeTime);
+    textViewStockName = (TextView) rootView.findViewById(R.id.textViewStockName);
+    textViewStockNumber = (TextView) rootView.findViewById(R.id.textViewStockNumber);
+    textViewCurrentPrice = (TextView) rootView.findViewById(R.id.textViewCurrentPrice);
+    textViewPriceChange = (TextView) rootView.findViewById(R.id.textViewPriceChange);
+    textViewTradeDate = (TextView) rootView.findViewById(R.id.textViewTradeDate);
+    textViewUpdateTime = (TextView) rootView.findViewById(R.id.textViewUpdateTime);
 
     // Sets company name, price, etc
-    tvCompany.setText(stock.getName());
-    tvCompanyTicker.setText(stock.getTicker());
-    tvPrice.setText(stock.getPrice());
-    tvPriceChange.setText(stock.getPriceChange());
-    tvTradeDate.setText(stock.getTradeDate());
-    tvTradeTime.setText("Updated: " + stock.getTradeTime());
+    textViewStockName.setText(stock.getStockName());
+    textViewStockNumber.setText(stock.getStockNumber());
+    textViewCurrentPrice.setText(stock.getCurPrice());
+    // @todo price change has not been supported yet.
+    textViewPriceChange.setText(stock.getCurPrice());
+    textViewTradeDate.setText(stock.getDate());
+    textViewUpdateTime.setText("Updated: " + stock.getTime());
 
-    // If price change is positive, set TextView to green. Otherwise Red.
+    /*    // If price change is positive, set TextView to green. Otherwise Red.
     if (stock.getPriceChangeDirection() >= 0) {
-      tvPriceChange.setTextColor(getResources().getColor(R.color.change_green));
+      textViewPriceChange.setTextColor(getResources().getColor(R.color.change_green));
     } else {
-      tvPriceChange.setTextColor(getResources().getColor(R.color.change_red));
-    }
+      textViewPriceChange.setTextColor(getResources().getColor(R.color.change_red));
+    }*/
 
     // Sets up the ViewPager
     mViewPager = (ViewPager) rootView.findViewById(R.id.pager);
-
     mStockInfoPagerAdapter = new StockInfoPagerAdapter(getActivity().getSupportFragmentManager());
     mViewPager = (ViewPager) rootView.findViewById(R.id.pager);
     mViewPager.setAdapter(mStockInfoPagerAdapter);
-    mViewPager.setCurrentItem(0);          // Set default starting page to the 1st item
+    mViewPager.setCurrentItem(1);          // Set default starting page to the 1st item
     mViewPager.setOffscreenPageLimit(2);   // Keep all pages loaded
-
     return rootView;
   }
 
@@ -90,7 +83,6 @@ public class StockPageFragment extends Fragment {
           return PriceInfoFragment.newInstance(stock);
         case 1:
           return PriceChartFragment.newInstance(stock);
-
         default:
           return PriceInfoFragment.newInstance(stock);
       }
@@ -103,13 +95,11 @@ public class StockPageFragment extends Fragment {
 
     @Override
     public CharSequence getPageTitle(int position) {
-
       switch (position) {
         case 0:
           return getResources().getString(R.string.price_info);
         case 1:
           return getResources().getString(R.string.charts);
-
         default:
           return "What";
       }

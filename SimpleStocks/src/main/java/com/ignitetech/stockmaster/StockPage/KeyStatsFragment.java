@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.kevinchou.simplestocks.R;
-import com.ignitetech.stockmaster.Stock;
+import com.ignitetech.stockmaster.R;
+import com.ignitetech.stockmaster.SinaStock;
 
 
 public class KeyStatsFragment extends Fragment {
@@ -21,12 +21,12 @@ public class KeyStatsFragment extends Fragment {
   TextView tvPriceBook;
   TextView tvEBITDA;
 
-  Stock stock;
+  SinaStock stock;
 
   public KeyStatsFragment() {
   }
 
-  public static KeyStatsFragment newInstance(Stock stock) {
+  public static KeyStatsFragment newInstance(SinaStock stock) {
 
     KeyStatsFragment fragment = new KeyStatsFragment();
     fragment.stock = stock;
@@ -46,13 +46,13 @@ public class KeyStatsFragment extends Fragment {
     tvPriceBook = (TextView) rootView.findViewById(R.id.tvPriceBook);
     tvEBITDA = (TextView) rootView.findViewById(R.id.tvEBITDA);
 
-    tvMarketCap.setText(stock.getMarketCap());
+    /*tvMarketCap.setText(stock.getMarketCap());
     tvTrailingPE.setText(stock.getTrailingPE());
     tvForwardPE.setText(stock.getForwardPE());
     tvPEGRatio.setText(stock.getPegRatio());
     tvPriceSales.setText(stock.getPriceSales());
     tvPriceBook.setText(stock.getPriceBook());
-    tvEBITDA.setText(stock.getEbitda());
+    tvEBITDA.setText(stock.getEbitda());*/
 
     return rootView;
   }

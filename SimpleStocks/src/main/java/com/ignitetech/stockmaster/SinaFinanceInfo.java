@@ -121,13 +121,8 @@ public class SinaFinanceInfo {
       sinaStock.setAsk5Price(responseData[ASK_5_PRICE_INDEX]);
       sinaStock.setDate(responseData[DATE_INDEX]);
       sinaStock.setTime(responseData[TIME_INDEX]);
-
-      // Convert price string to float, then round to 2 digits.
-      //sinaStock.setN(String.format("$%.2f", Float.parseFloat(responseData[0])));
-
     } catch (Exception e) {
-
-      Log.d("IOERROR", "Error occurred during generating data from http response:" + e.toString());
+      Log.d("DEBUG", "Error occurred during generating data from http response:" + e.toString());
     }
     return sinaStock;
   }

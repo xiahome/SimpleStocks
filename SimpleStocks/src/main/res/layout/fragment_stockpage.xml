@@ -19,9 +19,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/rlCompanyHeader">
             <TextView
-                android:text="Google Inc."
+                android:text="大秦铁路"
                 android:textSize="48dp"
-                android:id="@+id/tvCompany"
+                android:id="@+id/textViewStockName"
                 android:fontFamily="sans-serif-condensed"
                 android:textStyle="bold"
                 android:layout_width="0dp"
@@ -31,8 +31,8 @@
                 android:singleLine="true" />
 
             <TextView
-                android:id="@+id/tvCompanyTicker"
-                android:text="GOOG"
+                android:id="@+id/textViewStockNumber"
+                android:text="sh601006"
                 android:textSize="24dp"
                 android:fontFamily="sans-serif-light"
                 android:layout_alignParentRight="true"
@@ -41,8 +41,8 @@
         </LinearLayout>
 
         <TextView
-            android:text="$123.45"
-            android:id="@+id/tvPrice"
+            android:text="$15.20"
+            android:id="@+id/textViewCurrentPrice"
             android:textSize="24dp"
             android:layout_alignParentLeft="true"
             android:layout_below="@id/rlCompanyHeader"
@@ -52,9 +52,9 @@
 
         <TextView
             android:text="0.71 (0.52%)"
-            android:id="@+id/tvPriceChange"
-            android:layout_toRightOf="@+id/tvPrice"
-            android:layout_alignBaseline="@+id/tvPrice"
+            android:id="@+id/textViewPriceChange"
+            android:layout_toRightOf="@+id/textViewCurrentPrice"
+            android:layout_alignBaseline="@+id/textViewCurrentPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="4dp"
@@ -65,12 +65,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="right"
-            android:layout_alignBottom="@+id/tvPrice"
+            android:layout_alignBottom="@+id/textViewCurrentPrice"
             android:layout_alignParentRight="true">
 
             <TextView
-                android:text="2014/01/01"
-                android:id="@+id/tvTradeDate"
+                android:text="2016/07/01"
+                android:id="@+id/textViewTradeDate"
                 android:textAppearance="?android:textAppearanceSmall"
                 android:fontFamily="sans-serif-condensed"
                 android:layout_width="wrap_content"
@@ -78,7 +78,7 @@
 
             <TextView
                 android:text="Updated: 12:00pm"
-                android:id="@+id/tvTradeTime"
+                android:id="@+id/textViewUpdateTime"
                 android:fontFamily="sans-serif-condensed"
                 android:textAppearance="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
@@ -93,7 +93,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <android.support.v4.view.PagerTitleStrip
             android:id="@+id/pager_title_strip"
             android:layout_width="match_parent"
@@ -102,9 +101,6 @@
             android:paddingBottom="4dp"
             android:paddingTop="4dp"
             android:background="@drawable/line_under_view"/>
-
-
     </android.support.v4.view.ViewPager>
-
 
 </LinearLayout>
